@@ -32,7 +32,10 @@ pipeline{
         // Publish to nexus
         stage('Publish to Nexus'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}", classifier: '', file: 'target/VinayDevOpsLab-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'Nexus-credential', groupId: "${ GroupId}", nexusUrl: '10.0.0.74:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'keita-snapshot', version: "${Version}"
+                script {
+                    def NexusRepos = Version.endsWith("SNAPSHOT") ? "keita-snapshot" : "keita-release"
+                nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}", classifier: '', file: 'target/VinayDevOpsLab-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'Nexus-credential', groupId: "${ GroupId}", nexusUrl: '10.0.0.74:8081', nexusVersion: 'nexus3', protocol: 'http', repository: "${NexusRepos}", version: "${Version}"
+            }
             }
         }
         stage("Print environment information"){
