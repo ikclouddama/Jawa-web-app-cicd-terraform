@@ -4,6 +4,9 @@ pipeline{
     tools {
         maven 'maven'
     }
+    environment{
+        date= "1/5/2022"
+    }
 
     stages {
         // Specify various stage with in stages
