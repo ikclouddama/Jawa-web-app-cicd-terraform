@@ -34,7 +34,7 @@ pipeline{
             steps{
                 script {
                     def NexusRepos = Version.endsWith("SNAPSHOT") ? "keita-snapshot" : "keita-release"
-                nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}", classifier: '', file: 'target/VinayDevOpsLab-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'Nexus-credential', groupId: "${ GroupId}", nexusUrl: '10.0.0.74:8081', nexusVersion: 'nexus3', protocol: 'http', repository: "${NexusRepos}", version: "${Version}"
+                nexusArtifactUploader artifacts: [[artifactId: "${ArtifactID}", classifier: '', file: "target/${ArtifactId}-${Version}.war", type: 'war']], credentialsId: 'Nexus-credential', groupId: "${ GroupId}", nexusUrl: '10.0.0.74:8081', nexusVersion: 'nexus3', protocol: 'http', repository: "${NexusRepos}", version: "${Version}"
             }
             }
         }
