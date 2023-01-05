@@ -6,7 +6,7 @@ pipeline{
     }
     environment{
         ArtifactId = readMavenPom().getArtifactId()
-        //GroupId = readMavenPom().getGroupId
+        GroupId = readMavenPom().getGroupId()
         Version = readMavenPom().getVersion()
         Name= readMavenPom().getName()
         
@@ -32,7 +32,7 @@ pipeline{
         // Publish to nexus
         stage('Publish to Nexus'){
             steps{
-                nexusArtifactUploader artifacts: [[artifactId: 'VinayDevOpsLab', classifier: '', file: 'target/VinayDevOpsLab-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'Nexus-credential', groupId: 'com.vinaysdevopslab', nexusUrl: '10.0.0.74:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'keita-snapshot', version: '0.0.1-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: '${ArtifactID}', classifier: '', file: 'target/VinayDevOpsLab-0.0.1-SNAPSHOT.war', type: 'war']], credentialsId: 'Nexus-credential', groupId: '${ GroupId}', nexusUrl: '10.0.0.74:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'keita-snapshot', version: '${Version}'
             }
         }
         stage("Print environment information"){
