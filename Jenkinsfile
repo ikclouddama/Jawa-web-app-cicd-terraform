@@ -59,7 +59,7 @@ pipeline{
                             execCommand: 'ansible-playbook downloadanddeploy.yaml -i /opt/playbooks/hosts',
                             execTimeout: 120000
                         )
-                    ]
+                    ],
                      usePromotionTimestamp: false, 
                      useWorkspaceInPromotion: false, 
                      verbose: false)])
