@@ -57,7 +57,7 @@ pipeline{
                         sshTransfer(
                             cleanRemote:false,
                             execCommand: 'ansible-playbook downloadanddeploy.yaml -i /opt/playbooks/hosts',
-                            execTimeout: 120000
+                            execTimeout: 12000000000000
                         )
                     ],
                      usePromotionTimestamp: false, 
