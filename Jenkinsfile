@@ -46,8 +46,8 @@ pipeline{
             }
         }
 
-        // Stage3 : Publish the source code to Sonarqube
-        stage ('Deploy'){
+        // Stage3 : Publish the source code tomcat
+       /*stage ('Deploy'){
             steps {
                 echo 'deploying'
                 sshPublisher(publishers: 
@@ -65,7 +65,28 @@ pipeline{
                      verbose: false)])
                 }
 
+            } */
+            // Deployement to 
+            stage ('Dploy to Docker'){
+            steps {
+                echo 'deploying'
+                sshPublisher(publishers: 
+                [sshPublisherDesc(
+                    configName: 'Ansible-cotrolNode', 
+                    transfers: [
+                        sshTransfer(
+                            cleanRemote:false,
+                            execCommand: 'ansible-playbook /opt/playbooks/dockerfile.yaml -i /opt/playbooks/hosts',
+                            execTimeout: 120000
+                        )
+                    ],
+                     usePromotionTimestamp: false, 
+                     useWorkspaceInPromotion: false, 
+                     verbose: false)])
+                }
+
             }
+
         }
 
         

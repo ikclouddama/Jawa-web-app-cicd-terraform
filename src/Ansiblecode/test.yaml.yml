@@ -1,0 +1,15 @@
+--- 
+- name : keita is learning something new 
+  hosts: localhost
+  become: true 
+  tasks:
+  - name: Vorking with dictionary
+    vegetable: 
+    - Beans
+    - Carrotes
+    - Soja
+  - name: run some shell script
+    shell: touch ALlah1
+    args:
+    chdir: /opt/
+
